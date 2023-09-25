@@ -1,15 +1,33 @@
 import React, {useState} from 'react'
-import {KeyboardAvoidingView,  StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {KeyboardAvoidingView,  StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import { auth } from '../firebase';
 
 const LoginScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    
+    const handleSignUp = () => {
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log(user.email);
+            })
+            .catch(error => alert(error.message))
+    }
+    
 
   return (
     <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
     >
+        {/* Main title */}
+        <Text style={styles.title}>VetApp</Text>
+
+        <Text style={styles.subtitle}>Animals Hospital Registration</Text>
+
         {/*This view is for text files email and password*/}
         <View style={styles.inputContainer}>
             <TextInput
@@ -37,12 +55,18 @@ const LoginScreen = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => {}}
+                onPress={handleSignUp}
                 style={[styles.button, styles.buttonOutline]}
             >
                 <Text style={styles.buttonOutlineText}>Sign Up</Text>
             </TouchableOpacity>
         </View>
+
+        {/* Image */}
+        <Image
+                source={require('../assets/pet_login.png')}
+                style={styles.image}
+        />
 
     </KeyboardAvoidingView>
   )
@@ -55,6 +79,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#F9AE69',
+        marginBottom: 10
+    },
+    subtitle: {
+        fontSize: 18,
+        color: 'gray',
+        marginBottom: 30
     },
     inputContainer: {
         width: '80%'
@@ -73,7 +108,7 @@ const styles = StyleSheet.create({
         marginTop: 40
     }, 
     button: {
-        backgroundColor: '#0782F9',
+        backgroundColor: '#F9AE69',
         width: '100%',
         padding: 15,
         borderRadius: 30,
@@ -82,7 +117,7 @@ const styles = StyleSheet.create({
     buttonOutline: {
         backgroundColor: 'white',
         marginTop: 7,
-        borderColor: '#0782F9',
+        borderColor: '#F9AE69',
         borderWidth: 1
 
     }, 
@@ -92,8 +127,14 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     buttonOutlineText: {
-        color: '#0782F9',
+        color: '#F9AE69',
         fontWeight: '800',
         fontSize: 17
+    },
+    image: {
+        marginTop: 40, 
+        width: '80%',
+        height: 200, 
+        resizeMode: 'contain', 
     }
 })
