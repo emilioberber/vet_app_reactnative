@@ -7,7 +7,7 @@ const LoginScreen = () => {
         style={styles.container}
         behavior="padding"
     >
-        {/*This view is for text*/}
+        {/*This view is for text files email and password*/}
         <View style={styles.inputContainer}>
             <TextInput
                 placeholder='Email'
@@ -30,7 +30,7 @@ const LoginScreen = () => {
                 onPress={() => {}}
                 style={styles.button}
             >
-                <Text style={styles.button}>Login</Text>
+                <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -54,21 +54,43 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputContainer: {
-
+        width: '80%'
     }, 
     input: {
-
+        backgroundColor: "white",
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 15
     }, 
     buttonContainer: {
-
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40
     }, 
     button: {
-
+        backgroundColor: '#0782F9',
+        width: '100%',
+        padding: 15,
+        borderRadius: 30,
+        alignItems: 'center'
     }, 
     buttonOutline: {
+        backgroundColor: 'white',
+        marginTop: 7,
+        borderColor: '#0782F9',
+        borderWidth: 1
 
     }, 
+    buttonText: {
+        color: 'white',
+        fontWeight: '800',
+        fontSize: 17
+    },
     buttonOutlineText: {
-        
+        color: '#0782F9',
+        fontWeight: '800',
+        fontSize: 17
     }
 })
