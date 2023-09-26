@@ -2,13 +2,14 @@ import React, {useState} from 'react'
 import {KeyboardAvoidingView,  StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { auth } from '../firebase';
 
+
 const LoginScreen = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     
     const handleSignUp = () => {
-        auth
+        auth()
             .createUserWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
@@ -18,6 +19,33 @@ const LoginScreen = () => {
     }
     
 
+    /*
+    const handleSignUp = () => {
+        auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log('Usuario autenticado:', user.email);
+            // Continuar con otras acciones después de la autenticación exitosa
+        })
+        .catch(error => alert(error.message));
+    };
+    */
+    
+    
+
+    /*
+    const handleSignUp = async () => {
+        try {
+          const response = await auth().createUserWithEmailAndPassword(email, password);
+          console.log('Usuario registrado:', response.user.email);
+          // Puedes redirigir al usuario a la página de inicio o hacer otras acciones aquí.
+        } catch (error) {
+          console.error('Error al registrar usuario:', error);
+        }
+    };
+    */
+    
   return (
     <KeyboardAvoidingView
         style={styles.container}
@@ -71,7 +99,6 @@ const LoginScreen = () => {
     </KeyboardAvoidingView>
   )
 }
-
 export default LoginScreen
 
 const styles = StyleSheet.create({
